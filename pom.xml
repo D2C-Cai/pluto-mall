@@ -6,10 +6,12 @@
 
     <groupId>com.pluto</groupId>
     <artifactId>pluto-mall</artifactId>
+    <packaging>pom</packaging>
     <version>1.0.0</version>
-
-    <name>Spring Cloud Alibaba</name>
-    <description>Spring Cloud Alibaba</description>
+    <modules>
+        <module>common-server</module>
+        <module>common-client</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
