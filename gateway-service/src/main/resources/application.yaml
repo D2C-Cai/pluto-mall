@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: 8080
 
 spring:
   profiles:
@@ -14,7 +14,7 @@ spring:
     gateway:
       routes:
         - id: api-service-route
-          uri: http://127.0.0.1:8080
+          uri: http://127.0.0.1:8082
           predicates:
             - Path=/api/**
           filters:
