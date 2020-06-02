@@ -1,0 +1,15 @@
+###
+GET http://localhost:8082/api/hello
+Content-Type: application/x-www-form-urlencoded
+
+###
+POST http://localhost:8081/oauth/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&client_id=test-client&client_secret=test-secret&username=user-username&password=user-password
+
+###
+GET http://localhost:8082/api/hello
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTExMzQ3OTgsInVzZXJfbmFtZSI6InVzZXItdXNlcm5hbWUiLCJhdXRob3JpdGllcyI6WyJVU0VSIl0sImp0aSI6ImI2MGJlZDZlLTc0M2YtNDI1NS1hOGFmLWQ3MGMzNmFkNzBkNCIsImNsaWVudF9pZCI6InRlc3QtY2xpZW50Iiwic2NvcGUiOlsiZGVmYXVsdC1zY29wZSJdfQ.lsTT6_MkEeBQ7CnE1XIYvgGnbaWq8gX1b26wmCIMTJ6yTz3OMgXBHhXW-qznn2sCKc4vuCXBtmozjCy50g7sOa1_jVJMFlfhKir9iVXCsS2FdBTJ5oFdYkZFQNMAOG0IvRQBvkpHXMfR_Au6nE4iZ6MWJQ5kllZmUXCvZodA3vU
+
+###
