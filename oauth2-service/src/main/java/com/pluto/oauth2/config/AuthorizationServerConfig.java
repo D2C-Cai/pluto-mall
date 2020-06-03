@@ -1,5 +1,6 @@
 package com.pluto.oauth2.config;
 
+import com.pluto.oauth2.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     private final DataSource dataSource;
     private final PasswordEncoder passwordEncoder;
+    private final UserService userDetailsService;
     private final AuthenticationManager authenticationManagerBean;
 
     @Override
@@ -35,6 +37,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authenticationManager(authenticationManagerBean)
+                .userDetailsService(userDetailsService)
                 .accessTokenConverter(accessTokenConverter());
     }
 
