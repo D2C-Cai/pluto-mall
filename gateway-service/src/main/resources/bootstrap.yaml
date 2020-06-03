@@ -4,17 +4,18 @@ server:
 spring:
   profiles:
     active: dev
+
   application:
     name: gateway-service
+
   cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
-        namespace:
       config:
         server-addr: 127.0.0.1:8848
         file-extension: yaml
-        namespace:
+
     gateway:
       routes:
         - id: api-service-route
@@ -23,6 +24,7 @@ spring:
             - Path=/api/**
           filters:
             - StripPrefix=1
+
   security:
     oauth2:
       resourceserver:

@@ -1,0 +1,94 @@
+server:
+  port: 8085
+
+spring:
+  profiles:
+    active: dev
+
+  application:
+    name: upms-service
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+
+  redis:
+    # Redis数据库索引，默认为0
+    database: 0
+    # Redis端口
+    port: 6379
+    # Redis服务器主机
+    host: 192.168.204.128
+    lettuce:
+      pool:
+        # 连接池最大连接数
+        max-active: 8
+        # 连接池最大空闲
+        max-idle: 8
+        # 连接池最小空闲
+        min-idle: 2
+        # 连接池最大阻塞等待时间
+        max-wait: 1ms
+      # 超时时间
+      shutdown-timeout: 100ms
+
+  datasource:
+    name: upms
+    # 基本属性
+    url: jdbc:mysql://192.168.204.128:3306/upms?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&autoReconnect=true&rewriteBatchedStatements=true&allowMultiQueries=true
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    # druid相关配置
+    druid:
+      # 监控统计拦截的filters
+      filters: stat
+      # 配置初始化大小/最小/最大
+      initial-size: 10
+      min-idle: 10
+      max-active: 100
+      # 获取连接等待超时时间
+      max-wait: 60000
+      # 间隔多久进行一次检测，检测需要关闭的空闲连接
+      time-between-eviction-runs-millis: 60000
+      # 一个连接在池中最小生存的时间
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      # 打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+      # WebStatFilter配置
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: /druid/*,*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico
+        session-stat-enable: true
+        session-stat-max-count: 100
+      # StatViewServlet配置
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: true
+        login-username: caijiaqi
+        login-password: 88021120
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

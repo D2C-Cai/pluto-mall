@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pluto.upms.mapper.ResourceMapper">
+
+    <select id="findSecurityMetadata" resultType="com.pluto.upms.api.Metadata">
+        SELECT s.url AS resource_url, r.code AS role_code
+        FROM sys_role r, sys_resource s, sys_role_resource rs
+        WHERE r.id=rs.role_id AND s.id=rs.resource_id
+    </select>
+
+</mapper>

@@ -11,7 +11,7 @@
     <modules>
         <module>oauth2-service</module>
         <module>gateway-service</module>
-        <module>common-service</module>
+        <module>upms-service</module>
     </modules>
 
     <properties>
