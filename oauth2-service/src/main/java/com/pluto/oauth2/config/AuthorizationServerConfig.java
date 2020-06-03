@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
 
+import javax.sql.DataSource;
 import java.security.KeyPair;
 
 @AllArgsConstructor
@@ -22,16 +23,13 @@ import java.security.KeyPair;
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
+    private final DataSource dataSource;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManagerBean;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                .withClient("test-client")
-                .secret(passwordEncoder.encode("test-secret"))
-                .authorizedGrantTypes("refresh_token", "password")
-                .scopes("default-scope");
+        clients.jdbc(dataSource).passwordEncoder(passwordEncoder);
     }
 
     @Override
