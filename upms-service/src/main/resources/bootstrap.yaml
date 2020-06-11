@@ -11,9 +11,9 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: 192.168.204.128:8848
       config:
-        server-addr: 127.0.0.1:8848
+        server-addr: 192.168.204.128:8848
         file-extension: yaml
 
   redis:
@@ -76,8 +76,8 @@ spring:
         enabled: true
         url-pattern: /druid/*
         reset-enable: true
-        login-username: caijiaqi
-        login-password: 88021120
+        login-username: druid
+        login-password: druid
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss

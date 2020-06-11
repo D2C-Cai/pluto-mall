@@ -1,4 +1,4 @@
-package com.pluto.upms.config;
+package com.pluto.gateway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

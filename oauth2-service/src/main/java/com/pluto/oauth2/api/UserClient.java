@@ -1,14 +1,13 @@
 package com.pluto.oauth2.api;
 
-import com.pluto.oauth2.api.dto.UserDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(value = "upms-service")
 public interface UserClient {
 
-    @GetMapping(value = "/test/{username}")
-    UserDTO loadUserByUsername(@PathVariable String username);
+    @GetMapping(value = "/upms/user")
+    String loadUserByUsername(@RequestParam("username") String username);
 
 }

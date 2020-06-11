@@ -11,15 +11,15 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: 192.168.204.128:8848
       config:
-        server-addr: 127.0.0.1:8848
+        server-addr: 192.168.204.128:8848
         file-extension: yaml
 
     gateway:
       routes:
         - id: api-service-route
-          uri: http://127.0.0.1:8082
+          uri: http://127.0.0.1:8085
           predicates:
             - Path=/api/**
           filters:
@@ -30,6 +30,26 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: 'http://127.0.0.1:8081/.well-known/jwks.json'
+
+  redis:
+    # Redis数据库索引，默认为0
+    database: 0
+    # Redis端口
+    port: 6379
+    # Redis服务器主机
+    host: 192.168.204.128
+    lettuce:
+      pool:
+        # 连接池最大连接数
+        max-active: 8
+        # 连接池最大空闲
+        max-idle: 8
+        # 连接池最小空闲
+        min-idle: 2
+        # 连接池最大阻塞等待时间
+        max-wait: 1ms
+      # 超时时间
+      shutdown-timeout: 100ms
 
 management:
   endpoints:

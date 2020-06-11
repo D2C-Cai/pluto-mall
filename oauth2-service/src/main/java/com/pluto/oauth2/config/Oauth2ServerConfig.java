@@ -16,7 +16,6 @@ import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
 
-import javax.sql.DataSource;
 import java.security.KeyPair;
 
 @AllArgsConstructor
@@ -24,14 +23,20 @@ import java.security.KeyPair;
 @EnableAuthorizationServer
 public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 
-    private final DataSource dataSource;
     private final PasswordEncoder passwordEncoder;
     private final UserServiceImpl userDetailsService;
     private final AuthenticationManager authenticationManagerBean;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.jdbc(dataSource).passwordEncoder(passwordEncoder);
+        clients.inMemory()
+                .withClient("normal-app")
+                .secret(passwordEncoder.encode("123456"))
+                .scopes("SCOPE_TRUST")
+                .authorizedGrantTypes("password", "refresh_token")
+                .authorities("ROLE_ADMIN")
+                .accessTokenValiditySeconds(3600)
+                .refreshTokenValiditySeconds(86400);
     }
 
     @Override

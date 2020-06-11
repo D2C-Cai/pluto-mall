@@ -1,10 +1,11 @@
 package com.pluto.upms.handler;
 
 import com.pluto.upms.api.Metadata;
+import com.pluto.upms.constant.RedisConstant;
 import com.pluto.upms.mapper.ResourceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.util.AntPathMatcher;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -16,11 +17,11 @@ public class InitMetadataSourceHandler {
 
     @Autowired
     private ResourceMapper resourceMapper;
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
 
     // 全局{URL->ROLE[]}的TreeMap元数据缓存
     private TreeMap<String, List<String>> resourceRolesMap = new TreeMap<>();
-
-    private AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     @PostConstruct
     public void initMetadataCache() {
@@ -30,6 +31,7 @@ public class InitMetadataSourceHandler {
             List<String> roleList = resourceRolesMap.computeIfAbsent(resourceUrl, k -> new ArrayList<>());
             roleList.add(item.getRoleCode());
         }
+        redisTemplate.opsForHash().putAll(RedisConstant.RESOURCE_ROLES_MAP, resourceRolesMap);
     }
 
 }
