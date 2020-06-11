@@ -1,5 +1,6 @@
 package com.pluto.gateway.authorization;
 
+import com.pluto.gateway.constant.AuthConstant;
 import com.pluto.gateway.constant.RedisConstant;
 import com.pluto.gateway.utils.ConvertUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,10 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
-public class GatewayReactiveAuthorizationManager implements ReactiveAuthorizationManager<AuthorizationContext> {
+public class AuthorizationManager implements ReactiveAuthorizationManager<AuthorizationContext> {
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
@@ -27,6 +29,7 @@ public class GatewayReactiveAuthorizationManager implements ReactiveAuthorizatio
         // 远程获取
         Object obj = redisTemplate.opsForHash().get(RedisConstant.RESOURCE_ROLES_MAP, uri.getPath());
         List<String> authorities = ConvertUtils.castList(obj, String.class);
+        authorities = authorities.stream().map(i -> i = AuthConstant.AUTHORITY_PREFIX + i).collect(Collectors.toList());
         return mono
                 .filter(Authentication::isAuthenticated)
                 .flatMapIterable(Authentication::getAuthorities)

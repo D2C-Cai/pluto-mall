@@ -79,7 +79,7 @@ CREATE TABLE `sys_resource` (
 -- Records of sys_resource
 -- ----------------------------
 INSERT INTO `sys_resource` VALUES ('1', '2020-05-23 06:21:51', null, null, null, '加载菜单树', '/api/load/menus', '1', '1');
-INSERT INTO `sys_resource` VALUES ('2', '2020-05-23 06:25:43', null, null, null, '首页数据', '/api/index', '1', '0');
+INSERT INTO `sys_resource` VALUES ('2', '2020-05-23 06:25:43', null, null, null, '首页数据', '/api/hello', '1', '0');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -99,9 +99,9 @@ CREATE TABLE `sys_role` (
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES ('1', '2020-05-23 04:02:20', null, null, null, 'ROLE_ADMIN', '管理员');
-INSERT INTO `sys_role` VALUES ('2', '2020-05-23 04:02:36', null, null, null, 'ROLE_OM', '运营经理');
-INSERT INTO `sys_role` VALUES ('3', '2020-05-23 04:03:34', null, null, null, 'ROLE_PM', '产品经理');
+INSERT INTO `sys_role` VALUES ('1', '2020-05-23 04:02:20', null, null, null, 'ADMIN', '管理员');
+INSERT INTO `sys_role` VALUES ('2', '2020-05-23 04:02:36', null, null, null, 'OM', '运营经理');
+INSERT INTO `sys_role` VALUES ('3', '2020-05-23 04:03:34', null, null, null, 'PM', '产品经理');
 
 -- ----------------------------
 -- Table structure for sys_role_menu
